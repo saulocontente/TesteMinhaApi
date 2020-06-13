@@ -66,7 +66,7 @@ public class ClientTest {
     @Test
     @DisplayName("When send a POST to add a client, Then will receive StatusCode 201")
     public void postAddClient() {
-        String requestBody = "{\"id\":1,\"name\":\"Saulo\"}";
+        String requestBody = "{\"id\":\"3\",\"first_name\":\"Saulo11\"}";
 
 
         given()
@@ -87,8 +87,8 @@ public class ClientTest {
     @Test
     @DisplayName("When send a PUT to update a client, Then will receive StatusCode 200")
     public void putUpdateOneClient() {
-        String requestBody = "{\"id\":\"7\",\"name\":\"Saulo Contente\"}";
-        String paramId = "/7";
+        String requestBody = "{\"id\":8,\"email\":\"lindsay.ferguson@reqres.in\",\"first_name\":\"Saulo Contente\",\"last_name\":\"Ferguson\"}";
+        String paramId = "/8";
 
         given()
                 .contentType(JSON)
@@ -105,4 +105,20 @@ public class ClientTest {
         ;
     }
 
+    @Test
+    @DisplayName("When send a DELETE a client, Then will receive StatusCode 200 and the list without that client")
+    public void deleteOneClient() {
+        String paramId = "/12";
+
+        given()
+                .contentType(JSON)
+                .when()
+                .delete(url+resourceEndpoint+paramId)
+                .then()
+                .statusCode(200)
+                .extract()
+                .response()
+                .prettyPrint()
+        ;
+    }
 }
