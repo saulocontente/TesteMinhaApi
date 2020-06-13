@@ -63,4 +63,25 @@ public class ClientTest {
         ;
     }
 
+    @Test
+    @DisplayName("When send a POST to add a client, Then will receive StatusCode 201")
+    public void postAddClient() {
+        String requestBody = "{\"id\":1,\"name\":\"Saulo\"}";
+
+
+        given()
+                .contentType(JSON)
+                .body(requestBody)
+                .when()
+                .post(url+resourceEndpoint)
+                .then()
+                .statusCode(201)
+                .assertThat()
+                .body(new IsEqual(requestBody))
+                .extract()
+                .response()
+                .prettyPrint()
+        ;
+    }
+
 }
