@@ -84,4 +84,25 @@ public class ClientTest {
         ;
     }
 
+    @Test
+    @DisplayName("When send a PUT to update a client, Then will receive StatusCode 200")
+    public void putUpdateOneClient() {
+        String requestBody = "{\"id\":\"7\",\"name\":\"Saulo Contente\"}";
+        String paramId = "/7";
+
+        given()
+                .contentType(JSON)
+                .body(requestBody)
+                .when()
+                .put(url+resourceEndpoint+paramId)
+                .then()
+                .statusCode(200)
+                .assertThat()
+                .body(new IsEqual(requestBody))
+                .extract()
+                .response()
+                .prettyPrint()
+        ;
+    }
+
 }
