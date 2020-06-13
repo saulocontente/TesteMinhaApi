@@ -30,4 +30,37 @@ public class ClientTest {
         ;
     }
 
+    @Test
+    @DisplayName("When send a GET with ID, Then will receive the client of that ID")
+    public void getOneClientByID() {
+        String paramId = "/7";
+        String expectedResponse = "{\"id\":7,\"email\":\"michael.lawson@reqres.in\",\"first_name\":\"Michael\",\"last_name\":\"Lawson\"}";
+
+        given()
+                .contentType(JSON)
+                .when()
+                .get(url + resourceEndpoint + paramId)
+                .then()
+                .statusCode(200)
+                .assertThat()
+                .body(new IsEqual(expectedResponse))
+                .extract()
+                .response()
+                .prettyPrint()
+        ;
+    }
+    @Test
+    @DisplayName("When send a GET with ID unregistered, Then will receive StatusCode 204 and empty")
+    public void getNoneClientByID() {
+        String paramId = "/2";
+
+        given()
+                .contentType(JSON)
+                .when()
+                .get(url + resourceEndpoint + paramId)
+                .then()
+                .statusCode(204)
+        ;
+    }
+
 }
